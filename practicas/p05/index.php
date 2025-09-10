@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="es">
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-    <title>Práctica 3</title>
+    <title>Práctica 5</title>
 </head>
 <body>
     <h2>Ejercicio 1</h2>
@@ -28,6 +28,32 @@
         echo '<li>$var7 es válida porque inicia con una letra.</li>';
         echo '<li>$_element1 es válida porque inicia con guión bajo.</li>';
         echo '<li>$house*5 es inválida porque el símbolo * no está permitido.</li>';
+        echo '</ul>';
+    ?>
+    <h2>Ejercicio 2</h2>
+    <p>Proporcionar los valores de $a, $b, $c</p>
+    <?php
+        $a = "ManejadorSQL";
+        $b = 'MySQL';
+        $c = &$a;
+        
+        echo '<h4>Respuesta 1:</h4>';   
+        
+        echo '<ul>';
+        echo "<li>El valor de \$a es: $a</li>";
+        echo "<li>El valor de \$b es: $b</li>";
+        echo "<li>El valor de \$c es: $c</li>";
+        echo '</ul>';
+
+        $a = "PHP server";
+        $b = &$a;
+
+        echo '<h4>Respuesta 2:</h4>';
+
+        echo '<ul>';
+        echo "<li>El valor de \$a es: $a</li>";
+        echo "<li>El valor de \$b es: $b</li>";
+        echo "<li>El valor de \$c es: $c</li>";
         echo '</ul>';
     ?>
 </body>
