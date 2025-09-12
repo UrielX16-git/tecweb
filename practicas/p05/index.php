@@ -29,12 +29,14 @@
         echo '<li>$_element1 es válida porque inicia con guión bajo.</li>';
         echo '<li>$house*5 es inválida porque el símbolo * no está permitido.</li>';
         echo '</ul>';
+
+        echo '<hr>';
     ?>
     <h2>Ejercicio 2</h2>
     <p>Proporcionar los valores de $a, $b, $c</p>
     <?php
         unset($a, $b, $c);
-        
+
         $a = "ManejadorSQL";
         $b = 'MySQL';
         $c = &$a;
@@ -59,6 +61,8 @@
         echo '</ul>';
 
         echo '<p>El uso de & hace que se considere como un apuntador y por tanto si a varia, el resto también.</p>';
+
+        echo '<hr>';
     ?>
     <h2>Ejercicio 3</h2>
     <p>Muestra el contenido de cada variable inmediatamente después de cada asignación, verificar la evolución del tipo de estas variables (imprime todos los componentes de los arreglos):</p>
@@ -96,6 +100,8 @@
         print_r($z);
         echo '</pre>';
         echo "<p>Valor de \$a : $a</p>";
+
+        echo '<hr>';
     ?>
     <h2>Ejercicio 4</h2>
     <p>Lee y muestra los valores de las variables del ejercicio anterior, pero ahora desde la matriz $GLOBALS.</p>
@@ -111,6 +117,8 @@
         echo '<pre>';
         print_r($GLOBALS['z']);
         echo '</pre>';
+
+        echo '<hr>';
     ?>
     <h2>Ejercicio 5</h2>
     <p>Dar el valor de las variables $a, $b y $c al final del siguiente script.</p>
@@ -128,6 +136,54 @@
         echo "<li>El valor de \$c es: $c</li>";
         echo '</ul>';
 
+        echo '<hr>';
+    ?>
+    <h2>Ejercicio 6</h2>
+    <p>Comprobar el valor booleano de las variables $a, $b, $c, $d, $e y $f y mostrarlas usando la función var_dump().</p>
+    <?php
+        unset($a, $b, $c, $d, $e, $f);
+
+        // Definimos las variables
+        $a = "0";
+        $b = "TRUE";
+        $c = FALSE;
+        $d = ($a OR $b);
+        $e = ($a AND $c);
+        $f = ($a XOR $b);
+
+        echo '<p>El valor booleano de las variables definidas es:</p>';
+        echo '<ul>';
+        echo '<li>$a = "0" -> '; 
+        var_dump((bool)$a); 
+        echo '</li>';
+        echo '<li>$b = "TRUE" -> '; 
+        var_dump((bool)$b); 
+        echo '</li>';
+        echo '<li>$c = FALSE -> '; 
+        var_dump((bool)$c); 
+        echo '</li>';
+        echo '<li>$d = ($a OR $b) -> '; 
+        var_dump((bool)$d); 
+        echo '</li>';
+        echo '<li>$e = ($a AND $c) -> '; 
+        var_dump((bool)$e); 
+        echo '</li>';
+        echo '<li>$f = ($a XOR $b) -> '; 
+        var_dump((bool)$f); 
+        echo '</li>';
+        echo '</ul>';
+
+        // Transformar el booleano para mostrar con echo
+        echo '<p>Transformando el valor booleano de $c y $e para mostrarlos con echo:</p>';
+
+        // La función var_export() con el segundo parámetro en true, devuelve la representación en string.
+        $string_c = var_export((bool)$c, true);
+        $string_e = var_export((bool)$e, true);
+
+        echo 'El valor booleano de $c como string es: ' . $string_c . '<br>';
+        echo 'El valor booleano de $e como string es: ' . $string_e . '<br>';
+
+        echo '<hr>';
     ?>
 </body>
 </html>
