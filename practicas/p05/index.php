@@ -55,6 +55,43 @@
         echo "<li>El valor de \$b es: $b</li>";
         echo "<li>El valor de \$c es: $c</li>";
         echo '</ul>';
+
+        echo '<p>El uso de & hace que se considere como un apuntador y por tanto si a varia, el resto también.</p>';
+    ?>
+    <h2>Ejercicio 3</h2>
+    <p>Muestra el contenido de cada variable inmediatamente después de cada asignación, verificar la evolución del tipo de estas variables (imprime todos los componentes de los arreglos):</p>
+    <?php
+        $a = "PHP5";
+        echo "<p>Valor de \$a: $a</p>";
+        
+        $z[] = &$a;
+        echo '<p>Contenido del arreglo $z:</p>';
+        echo '<pre>';
+        print_r($z);
+        echo '</pre>';
+        
+        $b = "5a version de PHP";
+        echo "<p>Valor de \$b: $b</p>";
+        
+        $c = $b*10;
+        echo "<p>Valor de \$c: $c</p>";
+        
+        $a .= $b;
+        echo "<p>Valor de \$a: $a</p>";
+        echo '<p>Contenido del arreglo $z (después de modificar $a):</p>';
+        echo '<pre>';
+        print_r($z);
+        echo '</pre>';
+
+        $b *= $c;
+        echo "<p>Valor de \$b: $b</p>";
+        
+        $z[0] = "MySQL";
+        echo '<p>Contenido del arreglo $z (después de modificar el arreglo):</p>';
+        echo '<pre>';
+        print_r($z);
+        echo '</pre>';
+        echo "<p>Valor de \$a (afectado por la referencia): $a</p>";
     ?>
 </body>
 </html>
