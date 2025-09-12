@@ -33,6 +33,8 @@
     <h2>Ejercicio 2</h2>
     <p>Proporcionar los valores de $a, $b, $c</p>
     <?php
+        unset($a, $b, $c);
+        
         $a = "ManejadorSQL";
         $b = 'MySQL';
         $c = &$a;
@@ -61,6 +63,8 @@
     <h2>Ejercicio 3</h2>
     <p>Muestra el contenido de cada variable inmediatamente después de cada asignación, verificar la evolución del tipo de estas variables (imprime todos los componentes de los arreglos):</p>
     <?php
+        unset($a, $b, $c);
+
         $a = "PHP5";
         echo "<p>Valor de \$a: $a</p>";
         
@@ -107,6 +111,23 @@
         echo '<pre>';
         print_r($GLOBALS['z']);
         echo '</pre>';
+    ?>
+    <h2>Ejercicio 5</h2>
+    <p>Dar el valor de las variables $a, $b y $c al final del siguiente script.</p>
+    <?php
+        unset($a, $b, $c);
+
+        $a = "7 personas";
+        $b = (integer) $a;
+        $a = "9E3";
+        $c = (double) $a;
+
+        echo '<ul>';
+        echo "<li>El valor de \$a es: $a</li>";
+        echo "<li>El valor de \$b es: $b</li>";
+        echo "<li>El valor de \$c es: $c</li>";
+        echo '</ul>';
+
     ?>
 </body>
 </html>
