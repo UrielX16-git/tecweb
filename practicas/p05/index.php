@@ -91,7 +91,22 @@
         echo '<pre>';
         print_r($z);
         echo '</pre>';
-        echo "<p>Valor de \$a (afectado por la referencia): $a</p>";
+        echo "<p>Valor de \$a : $a</p>";
+    ?>
+    <h2>Ejercicio 4</h2>
+    <p>Lee y muestra los valores de las variables del ejercicio anterior, pero ahora desde la matriz $GLOBALS.</p>
+    <?php
+        
+        echo '<ul>';
+        echo '<li>Valor de $a: ' . $GLOBALS['a'] . '</li>';
+        echo '<li>Valor de $b: ' . $GLOBALS['b'] . '</li>';
+        echo '<li>Valor de $c: ' . $GLOBALS['c'] . '</li>';
+        echo '</ul>';
+        
+        echo '<p>Contenido del arreglo $z:</p>';
+        echo '<pre>';
+        print_r($GLOBALS['z']);
+        echo '</pre>';
     ?>
 </body>
 </html>
