@@ -33,20 +33,20 @@
       <p>Diseño personalizado del Tenis</p>
 
       <p>Color <em>(escoge uno)</em>:</p>
-        <ul>
-        <li>Rojo</li>
-        <li>Azul</li>
-        <li>Negro</li>
-        <li>Plateado</li>
-        </ul>
+      <ul>
+        <li><input type="radio" name="color" value="red" id="color_red" checked> <label for="color_red">Rojo</label></li>
+        <li><input type="radio" name="color" value="blue" id="color_blue"> <label for="color_blue">Azul</label></li>
+        <li><input type="radio" name="color" value="black" id="color_black"> <label for="color_black">Negro</label></li>
+        <li><input type="radio" name="color" value="silver" id="color_silver"> <label for="color_silver">Plateado</label></li>
+      </ul>
 
       <p>Características <em>(escoge tantas como quieras)</em>:</p>
-        <ul>
-        <li>Cordones brillantes</li>
-        <li>Logo metálico</li>
-        <li>Suela luminosa</li>
-        <li>WiFi integrado</li>
-        </ul>
+      <ul>
+        <li><input type="checkbox" name="features[]" value="laces" id="feature_laces"> <label for="feature_laces">Cordones brillantes</label></li>
+        <li><input type="checkbox" name="features[]" value="logo" id="feature_logo" checked> <label for="feature_logo">Logo metálico</label></li>
+        <li><input type="checkbox" name="features[]" value="light" id="feature_light"> <label for="feature_light">Suela luminosa</label></li>
+        <li><input type="checkbox" name="features[]" value="wifi" id="feature_wifi"> <label for="feature_wifi">WiFi integrado</label></li>
+      </ul>
 
       <p>Talla</p>
       <p>Las medidas reflejan el estándar masculino:</p>
