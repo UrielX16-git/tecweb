@@ -29,24 +29,40 @@ function generarSecuenciaImparParImpar() {
 
     return $html;
 }
-function encontrarMultiploWhile($numero_dado) {
+function encontrarMultiploWhile($numero2) {
     $intentos = 0;
     while (true) {
         $intentos++;
         $aleatorio = rand(1, 1000);
-        if ($aleatorio % $numero_dado == 0) {
-            return "<p>(while) El primer múltiplo de $numero_dado encontrado fue <b>$aleatorio</b> (en $intentos intentos).</p>";
+        if ($aleatorio % $numero2 == 0) {
+            return "<p>(while) El primer múltiplo de $numero2 encontrado fue <b>$aleatorio</b> (en $intentos intentos).</p>";
         }
     }
 }
 
-function encontrarMultiploDoWhile($numero_dado) {
+function encontrarMultiploDoWhile($numero2) {
     $intentos = 0;
     do {
         $intentos++;
         $aleatorio = rand(1, 1000);
-    } while ($aleatorio % $numero_dado != 0);
-    return "<p>(do-while) El primer múltiplo de $numero_dado encontrado fue <b>$aleatorio</b> (en $intentos intentos).</p>";
+    } while ($aleatorio % $numero2 != 0);
+    return "<p>(do-while) El primer múltiplo de $numero2 encontrado fue <b>$aleatorio</b> (en $intentos intentos).</p>";
+}
+
+function generarTablaAscii() {
+    $letras = [];
+    for ($i = 97; $i <= 122; $i++) {
+        $letras[$i] = chr($i);
+    }
+
+    $html = '<table border="1">';
+    $html .= '<tr><th>Código ASCII</th><th>Letra</th></tr>';
+    foreach ($letras as $codigo => $letra) {
+        $html .= "<tr><td>$codigo</td><td>$letra</td></tr>";
+    }
+    $html .= '</table>';
+
+    return $html;
 }
 
 ?>
