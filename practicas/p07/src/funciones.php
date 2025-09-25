@@ -8,9 +8,7 @@ function esMultiplo5y7($numero) {
 }
 function generarSecuenciaImparParImpar() {
     $matriz = [];
-    $iteraciones = 0;
     do {
-        $iteraciones++;
         $fila = [rand(1, 1000), rand(1, 1000), rand(1, 1000)];
         $matriz[] = $fila;
     } while ($fila[0] % 2 == 0 || $fila[1] % 2 != 0 || $fila[2] % 2 == 0);
@@ -31,4 +29,24 @@ function generarSecuenciaImparParImpar() {
 
     return $html;
 }
+function encontrarMultiploWhile($numero_dado) {
+    $intentos = 0;
+    while (true) {
+        $intentos++;
+        $aleatorio = rand(1, 1000);
+        if ($aleatorio % $numero_dado == 0) {
+            return "<p>(while) El primer múltiplo de $numero_dado encontrado fue <b>$aleatorio</b> (en $intentos intentos).</p>";
+        }
+    }
+}
+
+function encontrarMultiploDoWhile($numero_dado) {
+    $intentos = 0;
+    do {
+        $intentos++;
+        $aleatorio = rand(1, 1000);
+    } while ($aleatorio % $numero_dado != 0);
+    return "<p>(do-while) El primer múltiplo de $numero_dado encontrado fue <b>$aleatorio</b> (en $intentos intentos).</p>";
+}
+
 ?>

@@ -10,9 +10,9 @@
     <h2>Ejercicio 1</h2>
     <p>Escribir programa para comprobar si un número es un múltiplo de 5 y 7</p>
     <?php
-        if(isset($_GET['numero']))
+        if(isset($_GET['numero1']))
         {
-            $num = $_GET['numero'];
+            $num = $_GET['numero1'];
             echo esMultiplo5y7($num);
         }
     ?>
@@ -21,6 +21,16 @@
     <p>Crea un programa para la generación repetitiva de 3 números aleatorios hasta obtener una secuencia compuesta por: impar, par, impar</p>
     <?php
         echo generarSecuenciaImparParImpar();
+    ?>
+
+    <h2>Ejercicio 3</h2>
+    <p>Utiliza un ciclo while y do-while para encontrar el primer número entero obtenido aleatoriamente, pero que además sea múltiplo de un número dado.</p>
+    <?php
+        if(isset($_GET['numero2'])) {
+            $num_dado = $_GET['numero2'];
+            echo encontrarMultiploWhile($num_dado);
+            echo encontrarMultiploDoWhile($num_dado);
+        }
     ?>
 
     <h2>Ejemplo de POST</h2>
