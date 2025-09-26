@@ -39,6 +39,9 @@
         echo generarTablaAscii();
     ?>
 
+    <h2>Ejercicio 5</h2>
+    <p>Formulario <a href="ejercicio5_form.html">Ejercicio 5</a></p>
+
     <h2>Ejemplo de POST</h2>
     <form action="http://localhost/tecweb/practicas/p07/index.php" method="post">
         Name: <input type="text" name="name"><br>
