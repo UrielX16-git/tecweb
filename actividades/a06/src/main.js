@@ -4,6 +4,56 @@ var num1Default = Math.floor(Math.random() * 10) + 1;
 var num2Default = Math.floor(Math.random() * 10) + 1;
 var num3Default = Math.floor(Math.random() * 10) + 1;
 
+function mostrarMensaje() {
+    return "Cuidado<br>Ingresa tu documento correctamente<br>";
+}
+
+function mostrarRango(x1, x2) {
+    var inicio;
+    var resultado = "";
+    for (inicio = x1; inicio <= x2; inicio++) {
+        resultado += inicio + ' ';
+    }
+    return resultado;
+}
+
+function convertirCastellano(x) {
+    if (x == 1)
+        return "uno";
+    else
+    if (x == 2)
+        return "dos";
+    else
+    if (x == 3)
+        return "tres";
+    else
+    if (x == 4)
+        return "cuatro";
+    else
+    if (x == 5)
+        return "cinco";
+    else
+        return "valor incorrecto";
+}
+
+function convertirCastellanoSwitch(x) {
+    switch (x) {
+        case 1:
+            return "uno";
+        case 2:
+            return "dos";
+        case 3:
+            return "tres";
+        case 4:
+            return "cuatro";
+        case 5:
+            return "cinco";
+        default:
+            return "valor incorrecto";
+    }
+}
+
+
 function ejemplo1() {
     document.getElementById("resultado1").innerHTML = "Hola Mundo";
 }
@@ -125,12 +175,95 @@ function ejemplo9() {
     }
 }
 
-function ejemplo10() {}
-function ejemplo11() {}
-function ejemplo12() {}
-function ejemplo13() {}
-function ejemplo14() {}
-function ejemplo15() {}
-function ejemplo16() {}
-function ejemplo17() {}
-function ejemplo18() {}
+function ejemplo10() {
+    var x = 1;
+    var resultado = "";
+    while (x <= 100) {
+        resultado += x + '<br>';
+        x = x + 1;
+    }
+    document.getElementById("resultado10").innerHTML = resultado;
+}
+
+function ejemplo11() {
+    var x = 1;
+    var suma = 0;
+    var valor;
+    while (x <= 5) {
+        valor = prompt('Ingresa el valor:', num3Default);
+        valor = parseInt(valor);
+        suma = suma + valor;
+        x = x + 1;
+    }
+    document.getElementById("resultado11").innerHTML = "La suma de los valores es " + suma;
+}
+
+function ejemplo12() {
+    var valor;
+    var resultado = "";
+    do {
+        valor = prompt('Ingresa un valor entre 0 y 999:', '777');
+        valor = parseInt(valor);
+        resultado += 'El valor ' + valor + ' tiene ';
+        if (valor < 10) {
+            resultado += '1 dígito';
+        } else if (valor < 100) {
+            resultado += '2 dígitos';
+        } else {
+            resultado += '3 dígitos';
+        }
+        resultado += '<br>';
+    } while (valor != 0);
+    document.getElementById("resultado12").innerHTML = resultado;
+}
+
+function ejemplo13() {
+    var f;
+    var resultado = "";
+    for (f = 1; f <= 10; f++) {
+        resultado += f + " ";
+    }
+    document.getElementById("resultado13").innerHTML = resultado;
+}
+
+function ejemplo14() {
+    var resultado = "";
+    resultado += "Cuidado<br>";
+    resultado += "Ingresa tu documento correctamente<br>";
+    resultado += "Cuidado<br>";
+    resultado += "Ingresa tu documento correctamente<br>";
+    resultado += "Cuidado<br>";
+    resultado += "Ingresa tu documento correctamente<br>";
+    document.getElementById("resultado14").innerHTML = resultado;
+}
+
+function ejemplo15() {
+    var resultado = "";
+    resultado += mostrarMensaje();
+    resultado += mostrarMensaje();
+    resultado += mostrarMensaje();
+    document.getElementById("resultado15").innerHTML = resultado;
+}
+
+function ejemplo16() {
+    var valor1, valor2;
+    valor1 = prompt('Ingresa el valor inferior:', '5');
+    valor1 = parseInt(valor1);
+    valor2 = prompt('Ingresa el valor superior:', '37');
+    valor2 = parseInt(valor2);
+    document.getElementById("resultado16").innerHTML = mostrarRango(valor1, valor2);
+}
+
+function ejemplo17() {
+    var valor = prompt("Ingresa un valor entre 1 y 5", "4");
+    valor = parseInt(valor);
+    var r = convertirCastellano(valor);
+    document.getElementById("resultado17").innerHTML = r;
+}
+
+function ejemplo18() {
+    var valor = prompt("Ingresa un valor entre 1 y 5", "3");
+    valor = parseInt(valor);
+    var r = convertirCastellanoSwitch(valor);
+    document.getElementById("resultado18").innerHTML = r;
+}
