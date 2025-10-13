@@ -78,6 +78,7 @@ if (empty($id)) {
             </div>
 
             <button type="submit" class="btn btn-success">Actualizar Producto</button>
+            <button type="submit" class="btn btn-danger ml-2" formaction="delete_producto.php">Borrar Producto</button>
         </form>
     </div>
 
