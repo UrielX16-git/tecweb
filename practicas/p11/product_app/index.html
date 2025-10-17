@@ -1,57 +1,98 @@
 <!DOCTYPE html>
-<html lang="en">
-  <head>
+<html lang="es">
+<head>
     <meta charset="UTF-8">
     <title>Product App</title>
-  </head>
-  <body onload="init()">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+</head>
+<body>
 
     <!-- BARRA DE NAVEGACIÓN  -->
-    <nav>
-      <a href="#">Product App</a>
-      
-        <ul></ul>
-        <form>
-          <input name="search" id="search" type="search" placeholder="ID">
-          <button type="submit" onclick="buscarID(event)">Buscar</button>
-        </form>
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+        <a class="navbar-brand" href="#">Product App</a>
+        <div class="collapse navbar-collapse">
+            <ul class="navbar-nav ml-auto">
+                <form class="form-inline my-2 my-lg-0">
+                    <input name="search" id="search" class="form-control mr-sm-2" type="search" placeholder="Buscar producto...">
+                    <button type="submit" class="btn btn-success my-2 my-sm-0" onclick="buscarProducto(event)">Buscar</button>
+                </form>
+            </ul>
+        </div>
     </nav>
 
-    <div>
-      <div>
-        <!-- FORMULARIO PARA AGREGAR PRODUCTO -->
-        <form id="task-form">
-          <div>
-            <input type="text" id="name" placeholder="Nombre de producto">
-          </div>
-          <div>
-            <textarea id="description" cols="30" rows="10" placeholder="JSON de producto"></textarea>
-          </div>
-          <input type="hidden" id="taskId">
-          <button type="submit" onclick="agregarProducto(event)" >
-            Agregar Producto
-          </button>
-        </form>
-      </div>
+    <div class="container mt-4">
+        <div class="row">
+            <div class="col-md-4">
+                <!-- FORMULARIO PARA AGREGAR PRODUCTO -->
+                <div class="card">
+                    <div class="card-body">
+                        <h5 class="card-title">Agregar Producto</h5>
+                        <form id="product-form">
+                            <div class="form-group">
+                                <input type="text" id="nombre" placeholder="Nombre" class="form-control" required>
+                            </div>
+                            <div class="form-group">
+                                <select id="marca" class="form-control" required>
+                                    <option value="">-- Seleccione una marca --</option>
+                                    <option value="Nvidia">Nvidia</option>
+                                    <option value="AMD">AMD</option>
+                                    <option value="Intel">Intel</option>
+                                    <option value="Corsair">Corsair</option>
+                                    <option value="Razer">Razer</option>
+                                    <option value="Logitech">Logitech</option>
+                                    <option value="HyperX">HyperX</option>
+                                    <option value="Asus">Asus</option>
+                                    <option value="Gigabyte">Gigabyte</option>
+                                    <option value="MSI">MSI</option>
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <input type="text" id="modelo" placeholder="Modelo" class="form-control" required>
+                            </div>
+                            <div class="form-group">
+                                <input type="number" id="precio" placeholder="Precio" step="0.01" class="form-control" required>
+                            </div>
+                            <div class="form-group">
+                                <textarea id="detalles" cols="30" rows="5" placeholder="Detalles" class="form-control"></textarea>
+                            </div>
+                            <div class="form-group">
+                                <label for="unidades">Unidades: <output id="unidadesOutput">1</output></label>
+                                <input type="range" id="unidades" min="0" max="250" value="1" class="custom-range">
+                            </div>
+                            <div class="form-group">
+                                <input type="text" id="imagen" placeholder="URL de Imagen" class="form-control">
+                                <small class="form-text text-muted">Opcional. Si se deja en blanco, se usará "img/default.png".</small>
+                            </div>
+                            <button type="submit" class="btn btn-primary btn-block" onclick="agregarProducto(event)">
+                                Agregar Producto
+                            </button>
+                        </form>
+                    </div>
+                </div>
+            </div>
 
-      <!-- TABLA  -->
-      <div>
-        <ul></ul>
-
-        <table>
-          <thead>
-            <tr>
-              <td>Id</td>
-              <td>Nombre</td>
-              <td>Descripcion</td>
-            </tr>
-          </thead>
-          <tbody id="productos"></tbody>
-        </table>
-      </div>
+            <!-- TABLA  -->
+            <div class="col-md-8">
+                <table class="table table-bordered table-sm">
+                    <thead>
+                        <tr>
+                            <th>Id</th>
+                            <th>Nombre</th>
+                            <th>Marca</th>
+                            <th>Modelo</th>
+                            <th>Precio</th>
+                            <th>Unidades</th>
+                            <th>Detalles</th>
+                            <th>Imagen</th>
+                        </tr>
+                    </thead>
+                    <tbody id="productos"></tbody>
+                </table>
+            </div>
+        </div>
     </div>
 
     <!-- Lógica del Frontend -->
     <script src="./app.js"></script>
-  </body>
+</body>
 </html>
