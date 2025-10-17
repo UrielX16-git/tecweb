@@ -60,8 +60,8 @@
                                 <input type="range" id="unidades" min="0" max="250" value="1" class="custom-range">
                             </div>
                             <div class="form-group">
-                                <input type="text" id="imagen" placeholder="URL de Imagen" class="form-control">
-                                <small class="form-text text-muted">Opcional. Si se deja en blanco, se usará "img/default.png".</small>
+                                <select id="imagen" class="form-control"></select>
+                                <small class="form-text text-muted">Opcional. Si no se selecciona, se usará una imagen por defecto.</small>
                             </div>
                             <button type="submit" class="btn btn-primary btn-block" onclick="agregarProducto(event)">
                                 Agregar Producto
