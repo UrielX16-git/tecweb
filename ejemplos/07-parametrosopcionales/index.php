@@ -29,7 +29,7 @@
         echo '<br>';
 
         // SE USAN TODOS LOS PARÁMETROS
-        $cab4 = new Cabecera('El rincón del Programador', 'right', '#ff0000', '#ffff00');
+        $cab4 = new Cabecera('El rincón del Programador', 'center', '#ff0000', '#ffff00');
         $cab4->graficar();
     ?>
     

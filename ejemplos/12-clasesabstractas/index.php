@@ -29,6 +29,13 @@
         echo 'El resultado de 10-5 es: '.$resta1->getResultado();
 
 
+        $suma2 = new Operacion();  
+        $suma2->cargar1(20);
+        $suma2->cargar2(30);
+        $suma2->operar();
+        echo '<br>El resultado es: '.$suma2->getResultado();
+
+
     ?>
     
 </body>
