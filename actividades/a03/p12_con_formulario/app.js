@@ -1,25 +1,50 @@
-// JSON BASE A MOSTRAR EN FORMULARIO
-var baseJSON = {
-    "precio": 0.0,
-    "unidades": 1,
-    "modelo": "XX-000",
-    "marca": "NA",
-    "detalles": "NA",
-    "imagen": "img/default.png"
-  };
 
-function init() {
-    /**
-     * Convierte el JSON a string para poder mostrarlo
-     * ver: https://developer.mozilla.org/es/docs/Web/JavaScript/Reference/Global_Objects/JSON
-     */
-    let JsonString = JSON.stringify(baseJSON,null,2);
-    $("#description").val(JsonString);
-}
 
 $(document).ready(function () {
     // SE INICIALIZA LA PÁGINA
-    init();
+    // Script para el slider de unidades
+    const unidadesInput = document.getElementById('unidades');
+    const unidadesOutput = document.getElementById('unidadesOutput');
+    unidadesInput.addEventListener('input', () => {
+        unidadesOutput.textContent = unidadesInput.value;
+    });
+
+    // Script para poblar el selector de imágenes
+    $.ajax({
+        url: './backend/get_images.php',
+        type: 'GET',
+        success: function (images) {
+            const imagenSelect = document.getElementById('imagen');
+            
+            const defaultOption = document.createElement('option');
+            defaultOption.value = "";
+            defaultOption.textContent = "-- Seleccione una imagen --";
+            imagenSelect.appendChild(defaultOption);
+
+            if (images.length > 0) {
+                images.forEach(imagePath => {
+                    const option = document.createElement('option');
+                    option.value = imagePath;
+                    option.textContent = imagePath.split('/').pop(); // Muestra solo el nombre del archivo
+                    imagenSelect.appendChild(option);
+                });
+            } else {
+                const option = document.createElement('option');
+                option.textContent = 'No hay imágenes en el directorio';
+                option.disabled = true;
+                imagenSelect.appendChild(option);
+            }
+        },
+        error: function (jqXHR, textStatus, errorThrown) {
+            console.error('Error fetching images:', textStatus, errorThrown);
+            console.error('Response Text:', jqXHR.responseText);
+            const imagenSelect = document.getElementById('imagen');
+            const option = document.createElement('option');
+            option.textContent = 'Error al cargar imágenes';
+            option.disabled = true;
+            imagenSelect.appendChild(option);
+        }
+    });
 
     // SE LISTAN TODOS LOS PRODUCTOS
     listarProductos();
@@ -117,16 +142,38 @@ $(document).ready(function () {
     $('#product-form').submit(function (e) {
         e.preventDefault();
 
-        var productoJsonString = $('#description').val();
-        var finalJSON = JSON.parse(productoJsonString);
-        finalJSON['nombre'] = $('#name').val();
+        let isValid = true;
+        $('#product-form input, #product-form select, #product-form textarea').each(function() {
+            let field = $(this);
+            let validationStatus = validateField(field);
+            if (!validationStatus.valid) {
+                updateStatusBar(field, validationStatus.message, true);
+                field.focus();
+                isValid = false;
+                return false; // Break the loop
+            }
+        });
+
+        if (!isValid) {
+            return;
+        }
+
+        const finalJSON = {
+            nombre: $('#name').val(),
+            precio: $('#precio').val(),
+            unidades: $('#unidades').val(),
+            modelo: $('#modelo').val(),
+            marca: $('#marca').val(),
+            detalles: $('#detalles').val(),
+            imagen: $('#imagen').val()
+        };
         
         let url = $('#productId').val() ? './backend/product-update.php' : './backend/product-add.php';
         if($('#productId').val()){
             finalJSON['id'] = $('#productId').val();
         }
 
-        productoJsonString = JSON.stringify(finalJSON, null, 2);
+        const productoJsonString = JSON.stringify(finalJSON, null, 2);
 
         $.ajax({
             url: url,
@@ -135,20 +182,18 @@ $(document).ready(function () {
             contentType: 'application/json;charset=UTF-8',
             success: function (response) {
                 let respuesta = JSON.parse(response);
-                let template_bar = '';
-                template_bar += `
-                            <li style="list-style: none;">status: ${respuesta.status}</li>
-                            <li style="list-style: none;">message: ${respuesta.message}</li>
-                        `;
+                let productResult = $('#product-result');
+                productResult.find('.card-body').html(`<p class="text-success">${respuesta.message}</p>`);
+                productResult.removeClass('d-none');
 
-                $('#product-result').show();
-                $('#container').html(template_bar);
+                setTimeout(function() {
+                    productResult.addClass('d-none');
+                }, 3000);
 
                 listarProductos();
 
                 $('#product-form').trigger('reset');
-                let JsonString = JSON.stringify(baseJSON,null,2);
-                $("#description").val(JsonString);
+                $('#unidadesOutput').text('1');
                 $('#productId').val('');
             }
         });
@@ -193,10 +238,68 @@ $(document).ready(function () {
             success: function (response) {
                 let producto = JSON.parse(response);
                 $('#name').val(producto.nombre);
-                let JsonString = JSON.stringify(producto,null,2);
-                $("#description").val(JsonString);
+                $('#precio').val(producto.precio);
+                $('#unidades').val(producto.unidades);
+                $('#unidadesOutput').text(producto.unidades);
+                $('#modelo').val(producto.modelo);
+                $('#marca').val(producto.marca);
+                $('#detalles').val(producto.detalles);
+                $('#imagen').val(producto.imagen);
                 $('#productId').val(producto.id);
             }
         });
+    });
+
+    // VALIDACIONES
+    function validateField(field) {
+        let status = {
+            valid: true,
+            message: ''
+        };
+        if (field.prop('required') && !field.val()) {
+            status.valid = false;
+            status.message = 'Este campo es requerido';
+        } 
+        return status;
+    }
+
+    function updateStatusBar(field, message, isError) {
+        let feedbackDiv = field.next('.invalid-feedback');
+        feedbackDiv.text(message);
+        if (isError) {
+            field.addClass('is-invalid');
+            feedbackDiv.show();
+        } else {
+            field.removeClass('is-invalid');
+            feedbackDiv.hide();
+        }
+    }
+
+    $('#name').keyup(function() {
+        let nombre = $(this).val();
+        if (nombre) {
+            $.ajax({
+                url: './backend/product-check-name.php?nombre=' + nombre,
+                type: 'GET',
+                success: function(response) {
+                    let data = JSON.parse(response);
+                    if (data.status === 'error') {
+                        updateStatusBar($('#name'), data.message, true);
+                    } else {
+                        updateStatusBar($('#name'), data.message, false);
+                    }
+                }
+            });
+        }
+    });
+
+    $('#product-form input, #product-form select, #product-form textarea').blur(function() {
+        let field = $(this);
+        let validationStatus = validateField(field);
+        if (!validationStatus.valid) {
+            updateStatusBar(field, validationStatus.message, true);
+        } else {
+            updateStatusBar(field, '', false);
+        }
     });
 });
