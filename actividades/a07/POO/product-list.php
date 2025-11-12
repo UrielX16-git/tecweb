@@ -33,7 +33,7 @@ require_once __DIR__ . '/myapi/Products.php';
     echo json_encode($data, JSON_PRETTY_PRINT);
 */
 
-$products = new Products('nombre_de_tu_bd', 'usuario_bd', 'password_bd'); // Replace with actual DB credentials
+$products = new Products('marketzone', 'root', '161202');
 $products->list();
 echo $products->getData();
 

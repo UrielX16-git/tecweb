@@ -34,8 +34,21 @@ class Products extends DataBase
 
     public function list(): void
     {
-        // Placeholder for list logic
-        $this->response = ['status' => 'success', 'data' => [['id' => 1, 'name' => 'Product A'], ['id' => 2, 'name' => 'Product B']]];
+        $data = array();
+        if ($result = $this->conexion->query("SELECT * FROM productos WHERE eliminado = 0")) {
+            $rows = $result->fetch_all(MYSQLI_ASSOC);
+            if (!is_null($rows)) {
+                foreach ($rows as $num => $row) {
+                    foreach ($row as $key => $value) {
+                        $data[$num][$key] = utf8_encode($value);
+                    }
+                }
+            }
+            $result->free();
+            $this->response = ['status' => 'success', 'data' => $data];
+        } else {
+            $this->response = ['status' => 'error', 'message' => 'Query Error: ' . $this->conexion->error];
+        }
     }
 
     public function search(string $query): void
