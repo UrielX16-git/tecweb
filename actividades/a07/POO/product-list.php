@@ -1,4 +1,10 @@
 <?php
+
+namespace MyApi\Backend;
+
+require_once __DIR__ . '/myapi/Products.php';
+
+/*
     include_once __DIR__.'/database.php';
 
     // SE CREA EL ARREGLO QUE SE VA A DEVOLVER EN FORMA DE JSON
@@ -25,4 +31,10 @@
     
     // SE HACE LA CONVERSIÓN DE ARRAY A JSON
     echo json_encode($data, JSON_PRETTY_PRINT);
+*/
+
+$products = new Products('nombre_de_tu_bd', 'usuario_bd', 'password_bd'); // Replace with actual DB credentials
+$products->list();
+echo $products->getData();
+
 ?>

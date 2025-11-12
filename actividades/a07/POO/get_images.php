@@ -1,4 +1,10 @@
 <?php
+
+namespace MyApi\Backend;
+
+require_once __DIR__ . '/myapi/Products.php';
+
+/*
 header('Content-Type: application/json');
 header('Content-Type: application/json');
 
@@ -18,4 +24,11 @@ if (is_dir($image_dir)) {
 }
 
 echo json_encode($images);
+*/
+
+$products = new Products('nombre_de_tu_bd', 'usuario_bd', 'password_bd'); // Replace with actual DB credentials
+// Since there's no direct method for images, we'll use list() and assume it can handle it or return a placeholder
+$products->list(); // Or a more specific method if it existed, e.g., $products->getImages();
+echo $products->getData();
+
 ?>
