@@ -13,4 +13,12 @@ $app->get('/Hola/{nombre}', function ($request, $response, $args) {
     return $response;
 });
 
+$app->post('/prueba_post', function ($request, $response, $args) {
+    $req_post = $request->getParsedBody();
+    $val1 = $req_post['nombre'];
+    $val2 = $req_post['apellido'];
+    $response->write('Valores: ' . $val1 . ' ' . $val2);
+    return $response;
+});
+
 $app->run();
