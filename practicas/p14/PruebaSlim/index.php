@@ -8,4 +8,9 @@ $app->get('/', function ($request, $response, $args) {
     return $response;
 });
 
+$app->get('/Hola/{nombre}', function ($request, $response, $args) {
+    $response->write('Hola ' . $args['nombre']);
+    return $response;
+});
+
 $app->run();
